@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/scan.js": {
+      "maxDuration": 300
+    },
+    "api/gallery-search.js": {
+      "maxDuration": 30
+    }
+  }
+}

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>총공 글 종합기</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main class="app">
+  <header class="header">
+    <div class="brand"><span class="brand-dot"></span><div><h1 id="brandTitle">총공 글 종합기</h1><p id="brandDescription">기간과 갤러리를 지정해 총공 게시글을 종합합니다.</p></div></div>
+  </header>
+
+  <section class="card settings">
+    <div class="section-title">수집 설정</div>
+
+    <label>수집 방식</label>
+    <div class="mode-switch" role="group" aria-label="수집 방식 선택">
+      <button id="defaultModeButton" class="mode-button active" type="button" aria-pressed="true">총공 종합</button>
+      <button id="customModeButton" class="mode-button" type="button" aria-pressed="false">사용자 설정 종합</button>
+    </div>
+    <p class="hint mode-description" id="modeDescription">제목의 대괄호 안에 있는 내용을 기준으로 자동 분류합니다.</p>
+
+    <div id="customConditionPanel" class="custom-condition-panel hidden">
+      <div class="condition-heading"><label>직접 수집할 조건</label><span class="label-sub">여러 개 등록 가능</span></div>
+      <div id="conditionList" class="condition-list">
+        <div class="condition-row"><span class="condition-number">조건 1</span><input class="custom-condition" type="text" maxlength="120" placeholder="조건을 입력하세요" autocomplete="off"><button class="remove-condition" type="button" aria-label="조건 1 삭제" disabled>×</button></div>
+      </div>
+      <button id="addConditionButton" class="add-condition" type="button">＋ 조건 추가</button>
+      <p class="hint">게시글 제목 전체에서 조건 문구를 찾습니다. 제목에 조건이 하나만 해당하면 해당 조건으로, 2개 이상 겹치면 ‘기타’로 분류합니다.</p>
+      <div class="option-buttons" role="group" aria-label="조건 비교 옵션">
+        <button id="trimOption" class="option-button active" type="button" aria-pressed="true">앞뒤 공백 무시 (trim)</button>
+        <button id="caseOption" class="option-button active" type="button" aria-pressed="true">영어 대소문자 무시</button>
+      </div>
+    </div>
+
+    <label>갤러리</label>
+    <div class="search-wrap">
+      <input id="galleryInput" autocomplete="off" placeholder="갤러리 이름을 검색하세요">
+      <button id="galleryClear" class="clear hidden" type="button">×</button>
+      <div id="suggestions" class="suggestions hidden"></div>
+    </div>
+    <div id="selectedGallery" class="selected hidden"></div>
+
+    <div class="date-grid">
+      <div><label for="startDate">시작일</label><input id="startDate" type="date"></div>
+      <div><label for="endDate">종료일</label><input id="endDate" type="date"></div>
+    </div>
+
+    <div id="headFilterPanel">
+      <label>말머리 필터</label>
+      <select id="headMode">
+        <option value="all">전체 말머리</option>
+        <option value="taga">타갤만</option>
+        <option value="custom">직접 지정</option>
+      </select>
+      <input id="customHeads" class="custom-input hidden" placeholder="예: 타갤, 총공, 보은 (쉼표로 구분)">
+      <p class="hint">마이너/미니 갤러리에서만 의미가 있는 옵션입니다. 제목의 [대괄호]와 실제 디시 말머리는 따로 판단합니다.</p>
+    </div>
+
+    <button id="scanButton" class="primary" disabled>총공 종합 시작</button>
+    <div id="progress" class="progress hidden"><div class="spinner"></div><div><strong id="progressTitle">수집 중...</strong><span id="progressText"></span></div><b id="progressPage"></b></div>
+    <div id="error" class="error hidden"></div>
+  </section>
+
+
+  <section id="result" class="result hidden">
+    <div class="result-head"><div><span class="eyebrow">종합 결과</span><h2 id="resultTitle"></h2></div><div class="summary" id="summary"></div></div>
+    <div id="groupFilter" class="group-filter hidden" aria-label="갤러리 필터"></div>
+    <div id="groups"></div>
+  </section>
+
+</main>
+<script src="/app.js"></script>
+</body>
+</html>
